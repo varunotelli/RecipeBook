@@ -1,9 +1,10 @@
-import {EventEmitter} from '@angular/core';
+import {Subject} from 'rxjs';
+
 import {Recipe} from './recipe.model';
 import {Ingredient} from '../shared/ingredient.model';
 
 export class RecipeService{
-	recipeSelected: EventEmitter<Recipe> = new EventEmitter<Recipe>();
+	recipeSelected = new Subject<Recipe>();
 	private recipes: Recipe[] = [ new
 	Recipe("A test recipe", "This is a test",
 		"https://images.immediate.co.uk/production/volatile/sites/30/2020/08/chorizo-mozarella-gnocchi-bake-cropped-9ab73a3.jpg",
