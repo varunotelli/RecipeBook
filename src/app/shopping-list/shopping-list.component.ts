@@ -12,16 +12,21 @@ import {ShoppingListService} from "./shopping-list.service"
 export class ShoppingListComponent implements OnInit {
 
   ingredients: Ingredient[];
-  private igChangeSub: Subscription;
+  private igChangedSub: Subscription;
+  private igUpdateSub: Subscription;
   constructor(private shoppingListService: ShoppingListService) { }
 
   ngOnInit(): void {
     this.ingredients = this.shoppingListService.getIngredients();
-    this.igChangeSub = this.shoppingListService.ingredientAdded.subscribe((ingredient:Ingredient) => {this.ingredients.push(ingredient)});
+    this.igChangedSub = this.shoppingListService.ingredientsChanged.subscribe((ingredients:Ingredient[]) => {this.ingredients = ingredients});
+  }
+
+  onEditItem(index: number){
+    this.shoppingListService.startedEditing.next(index);
   }
 
   ngOnDestroy(): void{
-    this.igChangeSub.unsubscribe();
+    this.igChangedSub.unsubscribe();
   }
 
 }

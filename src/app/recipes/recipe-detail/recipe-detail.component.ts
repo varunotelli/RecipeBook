@@ -28,12 +28,18 @@ id: number;
   }
 
   onShoppingClicked(){
+     console.log(this.recipe.ingredients);
   	 this.recipe.ingredients.forEach((currentval, i) => {this.shoppingListService.addIngredient(currentval)});
   	 
   }
 
   onEditRecipe(){
   	this.router.navigate(['edit'],{relativeTo:this.route});
+  }
+
+  onDeleteRecipe(){
+    this.recipeService.deleteRecipe(this.id);
+    this.router.navigate(['/recipes']);
   }
 
 }
